@@ -19,6 +19,12 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', 'RoleController');
+    Route::resource('users', 'UserController');
+    Route::resource('products', 'ProductController');
+});
+
 /**
  * Login Route(s)
  */
